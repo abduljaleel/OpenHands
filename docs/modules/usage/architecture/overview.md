@@ -4,7 +4,7 @@ OpenHands follows an event-driven architecture with several key components worki
 
 ## System Architecture Diagram
 
-![OpenHands System Architecture](../../static/img/system_architecture_overview.md)
+![OpenHands System Architecture](/img/system_architecture_diagram.svg)
 
 The diagram above illustrates the key components of the OpenHands architecture and their relationships. The system follows an event-driven architecture with the EventStream serving as the central communication bus between components.
 

@@ -17,7 +17,7 @@ This guide outlines best practices for developing new features in OpenHands.
    - Create a technical design document if needed
 
 3. **Implement the Feature**
-   - Follow the [Code Style Guidelines](./code-style.md)
+   - Follow the [Code Style Guidelines](/modules/usage/development/code-style)
    - Implement the feature in small, incremental steps
    - Write clean, maintainable code
    - Use appropriate design patterns
@@ -35,7 +35,7 @@ This guide outlines best practices for developing new features in OpenHands.
    - Create examples of how to use the feature
 
 6. **Submit for Review**
-   - Follow the [Contribution Workflow](./contribution-workflow.md)
+   - Follow the [Contribution Workflow](/modules/usage/development/contribution-workflow)
    - Address feedback from reviewers
    - Iterate on the implementation as needed
 

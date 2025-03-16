@@ -5,7 +5,7 @@ This guide will help new developers get started with contributing to OpenHands.
 ## First Steps
 
 1. **Setup Development Environment**
-   - Follow the [Development Guide](../../../../Development.md) to set up your local environment
+   - Follow the Development Guide in the repository root to set up your local environment
    - Ensure all dependencies are installed correctly:
      - Python 3.12
      - Poetry >= 1.8
@@ -101,7 +101,7 @@ OpenHands is organized into several key directories:
    ```
 
 2. **Make Changes**
-   - Follow the [Code Style Guidelines](./code-style.md)
+   - Follow the [Code Style Guidelines](/modules/usage/development/code-style)
    - Ensure all tests pass
 
 3. **Run Tests**
@@ -186,4 +186,4 @@ After getting familiar with the codebase, you can:
 
 - Explore the [Feature Development Guide](./feature-development.md) for guidance on developing new features
 - Review the [Contribution Workflow Guide](./contribution-workflow.md) for details on the contribution process
-- Check the [API Documentation](../api/overview.md) for information on the API interfaces
+- Check the [API Documentation](/modules/usage/api/overview) for information on the API interfaces

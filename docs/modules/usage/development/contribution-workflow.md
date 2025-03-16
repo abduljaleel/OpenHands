@@ -31,7 +31,7 @@ This guide outlines the process for contributing to OpenHands.
    - Keep your branch focused on a single issue or feature
 
 4. **Make Changes**
-   - Follow the [Code Style Guidelines](./code-style.md)
+   - Follow the [Code Style Guidelines](/modules/usage/development/code-style)
    - Ensure all tests pass
    - Write new tests for your changes
    - Update documentation as needed
@@ -205,4 +205,4 @@ If you need help with the contribution process:
 
 ## Code of Conduct
 
-All contributors are expected to adhere to the project's [Code of Conduct](../../../../CODE_OF_CONDUCT.md). Please read it before contributing.
+All contributors are expected to adhere to the project's Code of Conduct. Please read it before contributing.
