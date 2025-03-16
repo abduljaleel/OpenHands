@@ -4,6 +4,12 @@
 
 This is the frontend of the OpenHands project. It is a React application that provides a web interface for the OpenHands project.
 
+For comprehensive documentation on the frontend architecture and components, please refer to:
+- [Frontend Architecture](../docs/modules/usage/architecture/frontend.md)
+- [Architecture Overview](../docs/modules/usage/architecture/overview.md)
+
+The central [Documentation Hub](../DOCUMENTATION.md) provides a complete index of all documentation resources.
+
 ## Tech Stack
 
 - Remix SPA Mode (React + Vite + React Router)

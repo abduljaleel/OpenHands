@@ -2,6 +2,12 @@
 
 This is a WebSocket server that executes tasks using an agent.
 
+For comprehensive documentation on the server architecture and components, please refer to:
+- [Server Components](../../docs/modules/usage/architecture/server.md)
+- [Architecture Overview](../../docs/modules/usage/architecture/overview.md)
+
+The central [Documentation Hub](../../DOCUMENTATION.md) provides a complete index of all documentation resources.
+
 ## Recommended Prerequisites
 
 - [Initialize the frontend code](../../frontend/README.md)

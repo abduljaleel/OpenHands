@@ -5,6 +5,14 @@ This directory contains the core components of OpenHands.
 This diagram provides an overview of the roles of each component and how they communicate and collaborate.
 ![OpenHands System Architecture Diagram (July 4, 2024)](../docs/static/img/system_architecture_overview.png)
 
+For comprehensive documentation on the OpenHands architecture, please refer to:
+- [Architecture Overview](../docs/modules/usage/architecture/overview.md)
+- [Agent System](../docs/modules/usage/architecture/agents.md)
+- [Event System](../docs/modules/usage/architecture/events.md)
+- [Server Components](../docs/modules/usage/architecture/server.md)
+
+The central [Documentation Hub](../DOCUMENTATION.md) provides a complete index of all documentation resources.
+
 ## Classes
 The key classes in OpenHands are:
 

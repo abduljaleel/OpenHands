@@ -159,13 +159,59 @@ const sidebars: SidebarsConfig = {
           items: [
             {
               type: 'doc',
-              label: 'Backend',
-              id: 'usage/architecture/backend',
+              label: 'Overview',
+              id: 'usage/architecture/overview',
+            },
+            {
+              type: 'doc',
+              label: 'Agent System',
+              id: 'usage/architecture/agents',
+            },
+            {
+              type: 'doc',
+              label: 'Event System',
+              id: 'usage/architecture/events',
             },
             {
               type: 'doc',
               label: 'Runtime',
               id: 'usage/architecture/runtime',
+            },
+            {
+              type: 'doc',
+              label: 'Server',
+              id: 'usage/architecture/server',
+            },
+            {
+              type: 'doc',
+              label: 'Frontend',
+              id: 'usage/architecture/frontend',
+            },
+            {
+              type: 'doc',
+              label: 'Backend',
+              id: 'usage/architecture/backend',
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Development',
+          items: [
+            {
+              type: 'doc',
+              label: 'Onboarding Guide',
+              id: 'usage/development/onboarding',
+            },
+            {
+              type: 'doc',
+              label: 'Contribution Workflow',
+              id: 'usage/development/contribution-workflow',
+            },
+            {
+              type: 'doc',
+              label: 'Feature Development',
+              id: 'usage/development/feature-development',
             },
           ],
         },
