@@ -196,6 +196,27 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'API Reference',
+          items: [
+            {
+              type: 'doc',
+              label: 'Core API',
+              id: 'usage/api/core',
+            },
+            {
+              type: 'doc',
+              label: 'Runtime API',
+              id: 'usage/api/runtime',
+            },
+            {
+              type: 'doc',
+              label: 'LLM API',
+              id: 'usage/api/llm',
+            },
+          ],
+        },
+        {
+          type: 'category',
           label: 'Development',
           items: [
             {
