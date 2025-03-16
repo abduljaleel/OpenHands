@@ -237,6 +237,27 @@ const sidebars: SidebarsConfig = {
           ],
         },
         {
+          type: 'category',
+          label: 'Troubleshooting',
+          items: [
+            {
+              type: 'doc',
+              label: 'Common Issues',
+              id: 'usage/troubleshooting/common-issues',
+            },
+            {
+              type: 'doc',
+              label: 'Debugging Guide',
+              id: 'usage/troubleshooting/debugging',
+            },
+            {
+              type: 'doc',
+              label: 'FAQ',
+              id: 'usage/troubleshooting/faq',
+            },
+          ],
+        },
+        {
           type: 'doc',
           label: 'Debugging',
           id: 'usage/how-to/debugging',
