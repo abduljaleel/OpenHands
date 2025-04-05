@@ -17,4 +17,5 @@ export default [
   ]),
 
   route("oauth/github/callback", "routes/oauth.github.callback.tsx"),
+  route("oauth/bitbucket/callback", "routes/oauth.bitbucket.callback.tsx"),
 ] satisfies RouteConfig;

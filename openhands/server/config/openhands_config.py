@@ -19,6 +19,8 @@ class OpenhandsConfig(OpenhandsConfigInterface):
     app_mode = AppMode.OSS
     posthog_client_key = 'phc_3ESMmY9SgqEAGBB6sMGK5ayYHkeUuknH2vP6FmWH9RA'
     github_client_id = os.environ.get('GITHUB_APP_CLIENT_ID', '')
+    bitbucket_client_id = os.environ.get('BITBUCKET_APP_CLIENT_ID', '')
+    bitbucket_client_secret = os.environ.get('BITBUCKET_APP_CLIENT_SECRET', '')
     settings_store_class: str = (
         'openhands.storage.settings.file_settings_store.FileSettingsStore'
     )
@@ -42,6 +44,7 @@ class OpenhandsConfig(OpenhandsConfigInterface):
         config = {
             'APP_MODE': self.app_mode,
             'GITHUB_CLIENT_ID': self.github_client_id,
+            'BITBUCKET_CLIENT_ID': self.bitbucket_client_id,
             'POSTHOG_CLIENT_KEY': self.posthog_client_key,
         }
 

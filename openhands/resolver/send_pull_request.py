@@ -11,6 +11,8 @@ from openhands.core.config import LLMConfig
 from openhands.core.logger import openhands_logger as logger
 from openhands.llm.llm import LLM
 from openhands.resolver.github_issue import GithubIssue
+from openhands.resolver.bitbucket_issue import BitbucketIssue
+from openhands.resolver.send_pull_request_bitbucket import send_bitbucket_pull_request, update_existing_bitbucket_pull_request
 from openhands.resolver.io_utils import (
     load_all_resolver_outputs,
     load_single_resolver_output,

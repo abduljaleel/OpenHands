@@ -10,12 +10,20 @@ import {
   removeAuthTokenHeader as removeGitHubAuthTokenHeader,
   setupAxiosInterceptors as setupGithubAxiosInterceptors,
 } from "#/api/github-axios-instance";
+import {
+  setAuthTokenHeader as setBitbucketAuthTokenHeader,
+  removeAuthTokenHeader as removeBitbucketAuthTokenHeader,
+  setupAxiosInterceptors as setupBitbucketAxiosInterceptors,
+} from "#/api/bitbucket-axios-instance";
 
 interface AuthContextType {
   gitHubToken: string | null;
+  bitbucketToken: string | null;
   setUserId: (userId: string) => void;
   setGitHubToken: (token: string | null) => void;
+  setBitbucketToken: (token: string | null) => void;
   clearGitHubToken: () => void;
+  clearBitbucketToken: () => void;
   refreshToken: () => Promise<boolean>;
   logout: () => void;
 }
@@ -26,6 +34,10 @@ function AuthProvider({ children }: React.PropsWithChildren) {
   const [gitHubTokenState, setGitHubTokenState] = React.useState<string | null>(
     () => localStorage.getItem("ghToken"),
   );
+  
+  const [bitbucketTokenState, setBitbucketTokenState] = React.useState<string | null>(
+    () => localStorage.getItem("bitbucketToken"),
+  );
 
   const [userIdState, setUserIdState] = React.useState<string>(
     () => localStorage.getItem("userId") || "",
@@ -33,12 +45,17 @@ function AuthProvider({ children }: React.PropsWithChildren) {
 
   const clearGitHubToken = () => {
     setGitHubTokenState(null);
-    setUserIdState("");
     localStorage.removeItem("ghToken");
-    localStorage.removeItem("userId");
 
     removeOpenHandsGitHubTokenHeader();
     removeGitHubAuthTokenHeader();
+  };
+  
+  const clearBitbucketToken = () => {
+    setBitbucketTokenState(null);
+    localStorage.removeItem("bitbucketToken");
+    
+    removeBitbucketAuthTokenHeader();
   };
 
   const setGitHubToken = (token: string | null) => {
@@ -52,6 +69,17 @@ function AuthProvider({ children }: React.PropsWithChildren) {
       clearGitHubToken();
     }
   };
+  
+  const setBitbucketToken = (token: string | null) => {
+    setBitbucketTokenState(token);
+    
+    if (token) {
+      localStorage.setItem("bitbucketToken", token);
+      setBitbucketAuthTokenHeader(token);
+    } else {
+      clearBitbucketToken();
+    }
+  };
 
   const setUserId = (userId: string) => {
     setUserIdState(userIdState);
@@ -60,6 +88,9 @@ function AuthProvider({ children }: React.PropsWithChildren) {
 
   const logout = () => {
     clearGitHubToken();
+    clearBitbucketToken();
+    setUserIdState("");
+    localStorage.removeItem("userId");
     posthog.reset();
   };
 
@@ -90,6 +121,7 @@ function AuthProvider({ children }: React.PropsWithChildren) {
     const setupIntercepter = async () => {
       const config = await OpenHands.getConfig();
       setupGithubAxiosInterceptors(config.APP_MODE, refreshToken, logout);
+      setupBitbucketAxiosInterceptors(config.APP_MODE, refreshToken, logout);
     };
 
     setupIntercepter();
@@ -98,13 +130,16 @@ function AuthProvider({ children }: React.PropsWithChildren) {
   const value = React.useMemo(
     () => ({
       gitHubToken: gitHubTokenState,
+      bitbucketToken: bitbucketTokenState,
       setGitHubToken,
+      setBitbucketToken,
       setUserId,
       clearGitHubToken,
+      clearBitbucketToken,
       refreshToken,
       logout,
     }),
-    [gitHubTokenState],
+    [gitHubTokenState, bitbucketTokenState],
   );
 
   return <AuthContext value={value}>{children}</AuthContext>;
