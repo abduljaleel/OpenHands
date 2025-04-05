@@ -29,6 +29,14 @@ export interface GitHubAccessTokenResponse {
   access_token: string;
 }
 
+export interface BitbucketAccessTokenResponse {
+  access_token: string;
+  token_type?: string;
+  refresh_token?: string;
+  expires_in?: number;
+  scope?: string;
+}
+
 export interface AuthenticationResponse {
   message: string;
   login?: string; // Only present when allow list is enabled

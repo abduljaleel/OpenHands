@@ -1,44 +1,36 @@
+import { useNavigate, useSearchParams } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
 import OpenHands from "#/api/open-hands";
 import { useAuth } from "#/context/auth-context";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
-export default function BitbucketAuthCallback() {
+function BitbucketAuthCallback() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { setBitbucketToken } = useAuth();
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get("code");
-    const error = params.get("error");
+  const code = searchParams.get("code");
 
-    if (error) {
-      setError(error);
-      return;
+  const { data, isSuccess, error } = useQuery({
+    queryKey: ["bitbucket_access_token", code],
+    queryFn: () => OpenHands.getBitbucketAccessToken(code!),
+    enabled: !!code,
+  });
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      setBitbucketToken(data.access_token);
+      navigate("/");
     }
-
-    if (!code) {
-      setError("No authorization code received");
-      return;
-    }
-
-    OpenHands.post("/api/bitbucket/token", { code })
-      .then((response) => {
-        setBitbucketToken(response.data.access_token);
-        navigate("/");
-      })
-      .catch((err) => {
-        setError(err.message || "Failed to authenticate with Bitbucket");
-      });
-  }, [setBitbucketToken, navigate]);
+  }, [isSuccess, data, setBitbucketToken, navigate]);
 
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
         <h1 className="text-2xl font-bold mb-4">Authentication Error</h1>
-        <p className="text-red-500">{error}</p>
+        <p className="text-red-500">{(error as Error).message}</p>
         <button
+          type="button"
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
           onClick={() => navigate("/")}
         >
@@ -55,3 +47,5 @@ export default function BitbucketAuthCallback() {
     </div>
   );
 }
+
+export default BitbucketAuthCallback;

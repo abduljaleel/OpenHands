@@ -5,28 +5,38 @@ import posthog from "posthog-js";
 import { I18nKey } from "#/i18n/declaration";
 import { setImportedProjectZip } from "#/state/initial-query-slice";
 import { convertZipToBase64 } from "#/utils/convert-zip-to-base64";
-import { useGitHubUser } from "#/hooks/query/use-github-user";
-import { useGitHubAuthUrl } from "#/hooks/use-github-auth-url";
-import { useConfig } from "#/hooks/query/use-config";
-import { useAuth } from "#/context/auth-context";
+import { useGitHubUser } from "../../hooks/query/use-github-user";
+import { useBitbucketUser } from "../../hooks/query/use-bitbucket-user";
+import { useGitHubAuthUrl } from "../../hooks/query/use-github-auth-url";
+import { useBitbucketAuthUrl } from "../../hooks/query/use-bitbucket-auth-url";
+import { useConfig } from "../../hooks/query/use-config";
+import { useAuth } from "../../context/auth-context";
 import { ImportProjectSuggestionBox } from "../../components/features/suggestions/import-project-suggestion-box";
-import { GitHubRepositoriesSuggestionBox } from "#/components/features/github/github-repositories-suggestion-box";
+import { GitHubRepositoriesSuggestionBox } from "../../components/features/github/github-repositories-suggestion-box";
+import { BitbucketRepositoriesSuggestionBox } from "../../components/features/bitbucket/bitbucket-repositories-suggestion-box";
 import { HeroHeading } from "#/components/shared/hero-heading";
 import { TaskForm } from "#/components/shared/task-form";
 
 function Home() {
   const { t } = useTranslation();
-  const { gitHubToken } = useAuth();
+  const { gitHubToken, bitbucketToken } = useAuth();
   const dispatch = useDispatch();
   const formRef = React.useRef<HTMLFormElement>(null);
 
   const { data: config } = useConfig();
-  const { data: user } = useGitHubUser();
+  const { data: githubUser } = useGitHubUser();
+  const { data: bitbucketUser } = useBitbucketUser();
 
   const gitHubAuthUrl = useGitHubAuthUrl({
     gitHubToken,
     appMode: config?.APP_MODE || null,
     gitHubClientId: config?.GITHUB_CLIENT_ID || null,
+  });
+
+  const bitbucketAuthUrl = useBitbucketAuthUrl({
+    bitbucketToken,
+    appMode: config?.APP_MODE || null,
+    bitbucketClientId: config?.BITBUCKET_CLIENT_ID || null,
   });
 
   const latestConversation = localStorage.getItem("latest_conversation_id");
@@ -42,8 +52,13 @@ function Home() {
         <div className="flex gap-4 w-full flex-col md:flex-row">
           <GitHubRepositoriesSuggestionBox
             handleSubmit={() => formRef.current?.requestSubmit()}
-            gitHubAuthUrl={gitHubAuthUrl}
-            user={user || null}
+            gitHubAuthUrl={gitHubAuthUrl || null}
+            user={githubUser || null}
+          />
+          <BitbucketRepositoriesSuggestionBox
+            handleSubmit={() => formRef.current?.requestSubmit()}
+            bitbucketAuthUrl={bitbucketAuthUrl || null}
+            user={bitbucketUser || null}
           />
           <ImportProjectSuggestionBox
             onChange={async (event) => {

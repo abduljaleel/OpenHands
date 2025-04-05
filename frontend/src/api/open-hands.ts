@@ -4,6 +4,7 @@ import {
   Feedback,
   FeedbackResponse,
   GitHubAccessTokenResponse,
+  BitbucketAccessTokenResponse,
   ErrorResponse,
   GetConfigResponse,
   GetVSCodeUrlResponse,
@@ -365,6 +366,22 @@ class OpenHands {
   ): Promise<GetTrajectoryResponse> {
     const { data } = await openHands.get<GetTrajectoryResponse>(
       `/api/conversations/${conversationId}/trajectory`,
+    );
+    return data;
+  }
+
+  /**
+   * @param code Code provided by Bitbucket
+   * @returns Bitbucket access token
+   */
+  static async getBitbucketAccessToken(
+    code: string,
+  ): Promise<BitbucketAccessTokenResponse> {
+    const { data } = await openHands.post<BitbucketAccessTokenResponse>(
+      "/api/bitbucket/token",
+      {
+        code,
+      },
     );
     return data;
   }
